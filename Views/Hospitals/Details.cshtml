@@ -1,0 +1,86 @@
+﻿@model Epandemia.Models.Hospital
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hospital</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxBeds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxBeds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberEmployees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberEmployees)
+        </dd>
+
+    </dl>
+</div>
+<dd>
+    <h4>Users</h4>
+    <ul>
+        @foreach (var item in Model.Users)
+        {
+        <div style="display: flex; align-items: center">
+            <li>@Html.ActionLink(item.FirstName, "Details", "Users", new { id = item.Id }, null)</li>
+            <img src="~/Images/@item.Image" alt="" height="130px" width="130px" style="margin-left: 100px" />
+        </div>}
+    </ul>
+</dd>
+<dd>
+    <h4>Employees</h4>
+    <ul>
+        @foreach (var item in Model.Employees)
+        {
+            <li>@Html.ActionLink(item.FirstName, "Details", "Employees", new { id = item.Id }, null)</li>
+        }
+    </ul>
+</dd>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

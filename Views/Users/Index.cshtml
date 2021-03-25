@@ -1,0 +1,83 @@
+﻿@model PagedList.IPagedList<Epandemia.Models.User>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("FirstName", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th>
+            @Html.ActionLink("LastName", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th>
+            @Html.ActionLink("Hospital", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th>
+            @Html.ActionLink("Age", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th>
+            @Html.ActionLink("Gender", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th>
+            @Html.ActionLink("DateAdded", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.ActionLink(item.FirstName, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink(item.LastName, "Details", new { id = item.Id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hospital.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
