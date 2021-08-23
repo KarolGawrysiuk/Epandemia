@@ -134,7 +134,10 @@ namespace Epandemia.Controllers
             }
         }
 
-        //
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
